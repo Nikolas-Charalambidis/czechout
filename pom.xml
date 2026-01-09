@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>dev.nichar</groupId>
+    <artifactId>czechout</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- Jackson. -->
+        <tools.jackson.version>3.0.3</tools.jackson.version>
+        <tools.jackson.datatype.jsr310.version>3.0.0-rc3</tools.jackson.datatype.jsr310.version>
+        <!-- XSLT. -->
+        <net.sf.saxon.version>12.4</net.sf.saxon.version>
+        <org.apache.xmlgraphics.version>2.11</org.apache.xmlgraphics.version>
+        <!-- MS Excel. -->
+        <org.apache.poi.version>5.4.1</org.apache.poi.version>
+        <!-- Tools. -->
+        <org.iban4j.version>3.2.11-RELEASE</org.iban4j.version>
+        <com.google.zxing.version>3.4.1</com.google.zxing.version>
+        <org.mapstruct.version>1.6.3</org.mapstruct.version>
+        <org.projectlombok.mapstruct-binding.version>0.2.0</org.projectlombok.mapstruct-binding.version>
+        <org.projectlombok.version>1.18.42</org.projectlombok.version>
+        <!-- Logging. -->
+        <org.slf4j.version>2.0.17</org.slf4j.version>
+        <org.log4j.version>2.25.3</org.log4j.version>
+        <!-- Quality. -->
+        <org.checkerframework.version>3.53.0</org.checkerframework.version>
+        <!-- Tests. -->
+        <org.junit.version>6.1.0-M1</org.junit.version>
+
+        <!-- Maven plugins. -->
+        <org.apache.maven.plugins.maven-compiler-plugin.version>3.14.1</org.apache.maven.plugins.maven-compiler-plugin.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <!-- Jackson. -->
+                <groupId>tools.jackson</groupId>
+                <artifactId>jackson-bom</artifactId>
+                <version>${tools.jackson.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <!-- Tests. -->
+                <groupId>org.junit</groupId>
+                <artifactId>junit-bom</artifactId>
+                <version>${org.junit.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <!-- Jackson. -->
+        <dependency>
+            <groupId>tools.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>tools.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+        <dependency>
+            <!-- XmlMapper and @JacksonXml* annotations. -->
+            <groupId>tools.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-xml</artifactId>
+        </dependency>
+        <dependency>
+            <!-- YAMLMapper. -->
+            <groupId>tools.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-yaml</artifactId>
+        </dependency>
+
+        <!-- XSLT. -->
+        <dependency>
+            <!-- XSLT 2.0 -->
+            <groupId>net.sf.saxon</groupId>
+            <artifactId>Saxon-HE</artifactId>
+            <version>${net.sf.saxon.version}</version>
+        </dependency>
+        <dependency>
+            <!-- FOP processor. -->
+            <groupId>org.apache.xmlgraphics</groupId>
+            <artifactId>fop</artifactId>
+            <version>${org.apache.xmlgraphics.version}</version>
+        </dependency>
+
+        <!-- MS Excel. -->
+        <dependency>
+            <!-- OOXML support (xlsx). -->
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>${org.apache.poi.version}</version>
+        </dependency>
+
+        <!-- Tools. -->
+        <dependency>
+            <!-- Iban converter. -->
+            <groupId>org.iban4j</groupId>
+            <artifactId>iban4j</artifactId>
+            <version>${org.iban4j.version}</version>
+        </dependency>
+        <dependency>
+            <!-- QR code. -->
+            <groupId>com.google.zxing</groupId>
+            <artifactId>core</artifactId>
+            <version>${com.google.zxing.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct</artifactId>
+            <version>${org.mapstruct.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${org.projectlombok.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Logging. -->
+        <dependency>
+            <!-- Slf4j facade. -->
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${org.slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <!-- Slf4J implementation (Log4j). -->
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>${org.log4j.version}</version>
+        </dependency>
+
+        <!-- Quality. -->
+        <dependency>
+            <groupId>org.checkerframework</groupId>
+            <artifactId>checker-qual</artifactId>
+            <version>${org.checkerframework.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <!-- Tests. -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${org.apache.maven.plugins.maven-compiler-plugin.version}</version>
+                <configuration>
+                    <showDeprecation>true</showDeprecation>
+                    <showWarnings>true</showWarnings>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.mapstruct</groupId>
+                            <artifactId>mapstruct-processor</artifactId>
+                            <version>${org.mapstruct.version}</version>
+                        </path>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${org.projectlombok.version}</version>
+                        </path>
+                        <path>
+                            <!--
+                            Additional annotation processor required as of Lombok 1.18.16
+                            See: https://mapstruct.org/documentation/stable/reference/html/#lombok
+                            -->
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok-mapstruct-binding</artifactId>
+                            <version>${org.projectlombok.mapstruct-binding.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

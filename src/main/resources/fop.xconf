@@ -1,0 +1,14 @@
+<fop version="1.0">
+  <renderers>
+    <renderer mime="application/pdf">
+      <fonts>
+        <font kerning="yes" embed-url="fonts/consolas-normal.ttf">
+          <font-triplet name="Consolas" style="normal" weight="normal"/>
+        </font>
+        <font kerning="yes" embed-url="fonts/consolas-bold.ttf">
+          <font-triplet name="Consolas" style="normal" weight="bold"/>
+        </font>
+      </fonts>
+    </renderer>
+  </renderers>
+</fop>
