@@ -13,13 +13,15 @@
                 </fo:simple-page-master>
             </fo:layout-master-set>
 
-            <xsl:for-each select="/invoices/invoice">
-                <fo:page-sequence master-reference="A4">
-                    <fo:flow flow-name="xsl-region-body" font-size="9pt">
-                        <xsl:call-template name="invoice-template"/>
-                    </fo:flow>
-                </fo:page-sequence>
-            </xsl:for-each>
+            <xsl:apply-templates select="//invoice"/>
         </fo:root>
+    </xsl:template>
+
+    <xsl:template match="invoice">
+        <fo:page-sequence master-reference="A4">
+            <fo:flow flow-name="xsl-region-body" font-size="9pt">
+                <xsl:call-template name="invoice-template"/>
+            </fo:flow>
+        </fo:page-sequence>
     </xsl:template>
 </xsl:stylesheet>

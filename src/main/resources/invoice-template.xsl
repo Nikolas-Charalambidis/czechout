@@ -12,6 +12,17 @@
 
     <xsl:decimal-format name="czech" grouping-separator=" " decimal-separator="," />
 
+    <xsl:attribute-set name="label">
+        <xsl:attribute name="font-size">14pt</xsl:attribute>
+        <xsl:attribute name="margin-bottom">5pt</xsl:attribute>
+        <xsl:attribute name="font-weight">bold</xsl:attribute>
+    </xsl:attribute-set>
+
+    <xsl:attribute-set name="standard-margin">
+        <xsl:attribute name="margin-left">12px</xsl:attribute>
+        <xsl:attribute name="margin-bottom">5pt</xsl:attribute>
+    </xsl:attribute-set>
+
     <xsl:function name="this:format-bigdecimal" as="xs:string">
         <xsl:param name="value"/>
         <xsl:param name="suffix"/>
@@ -31,6 +42,35 @@
         </xsl:choose>
     </xsl:function>
 
+    <xsl:template name="render-address">
+        <xsl:param name="party"/>
+        <xsl:param name="title"/>
+
+        <fo:block xsl:use-attribute-sets="label"><xsl:value-of select="$title"/></fo:block>
+
+        <fo:block xsl:use-attribute-sets="standard-margin">
+            <xsl:value-of select="$party/name"/>
+        </fo:block>
+
+        <fo:block xsl:use-attribute-sets="standard-margin">
+            <xsl:value-of select="string-join(($party/address/street, $party/address/houseNumber), ' ')"/>
+        </fo:block>
+
+        <fo:block xsl:use-attribute-sets="standard-margin">
+            <xsl:value-of select="concat($party/address/zipCode, ' ', $party/address/district, ', ', $party/address/city)"/>
+        </fo:block>
+
+        <fo:block xsl:use-attribute-sets="standard-margin" font-weight="bold">
+            <xsl:value-of select="concat($party/identifierType, ': ', $party/identifier)"/>
+        </fo:block>
+
+        <xsl:if test="$party/vat">
+            <fo:block xsl:use-attribute-sets="standard-margin" font-weight="bold">
+                <xsl:value-of select="concat($party/vatPrefix, ': ', $party/vat)"/>
+            </fo:block>
+        </xsl:if>
+    </xsl:template>
+
     <xsl:template name="invoice-template">
 
         <fo:block font-size="24pt">
@@ -42,25 +82,20 @@
         <fo:block margin-left="12px" margin-bottom="20pt">Daňový doklad</fo:block>
 
         <fo:table margin-bottom="10pt" width="100%" table-layout="fixed">
-            <fo:table-column column-width="62%"/>
-            <fo:table-column column-width="38%"/>
+            <fo:table-column column-width="62%"/><fo:table-column column-width="38%"/>
             <fo:table-body>
                 <fo:table-row>
                     <fo:table-cell>
-                        <fo:block font-size="14pt" margin-bottom="5pt" font-weight="bold">Dodavatel:</fo:block>
-                        <fo:block margin-left="12px" margin-bottom="5pt"><xsl:value-of select="issuer/name"/></fo:block>
-                        <fo:block margin-left="12px" margin-bottom="5pt"><xsl:value-of select="issuer/address/street"/>&#160;<xsl:value-of select="issuer/address/houseNumber"/></fo:block>
-                        <fo:block margin-left="12px" margin-bottom="5pt"><xsl:value-of select="issuer/address/zipCode"/>&#160;<xsl:value-of select="issuer/address/district"/>,&#160;<xsl:value-of select="issuer/address/city"/></fo:block>
-                        <fo:block margin-left="12px" margin-bottom="5pt" font-weight="bold" ><xsl:value-of select="issuer/identifierType"/>:&#160;<xsl:value-of select="issuer/identifier"/></fo:block>
-                        <fo:block margin-left="12px" margin-bottom="5pt" font-weight="bold" ><xsl:value-of select="issuer/vatPrefix"/>:&#160;<xsl:value-of select="issuer/vat"/></fo:block>
+                        <xsl:call-template name="render-address">
+                            <xsl:with-param name="party" select="issuer"/>
+                            <xsl:with-param name="title" select="'Dodavatel:'"/>
+                        </xsl:call-template>
                     </fo:table-cell>
                     <fo:table-cell>
-                        <fo:block font-size="14pt" margin-bottom="5pt" font-weight="bold">Odběratel:</fo:block>
-                        <fo:block margin-left="12px" margin-bottom="5pt"><xsl:value-of select="recipient/name"/></fo:block>
-                        <fo:block margin-left="12px" margin-bottom="5pt"><xsl:value-of select="recipient/address/street"/>&#160;<xsl:value-of select="recipient/address/houseNumber"/></fo:block>
-                        <fo:block margin-left="12px" margin-bottom="5pt"><xsl:value-of select="recipient/address/zipCode"/>&#160;<xsl:value-of select="recipient/address/district"/>,&#160;<xsl:value-of select="recipient/address/city"/></fo:block>
-                        <fo:block margin-left="12px" margin-bottom="5pt" font-weight="bold" ><xsl:value-of select="recipient/identifierType"/>:&#160;<xsl:value-of select="recipient/identifier"/></fo:block>
-                        <fo:block margin-left="12px" margin-bottom="5pt" font-weight="bold" ><xsl:value-of select="recipient/vatPrefix"/>:&#160;<xsl:value-of select="recipient/vat"/></fo:block>
+                        <xsl:call-template name="render-address">
+                            <xsl:with-param name="party" select="recipient"/>
+                            <xsl:with-param name="title" select="'Odběratel:'"/>
+                        </xsl:call-template>
                     </fo:table-cell>
                 </fo:table-row>
             </fo:table-body>

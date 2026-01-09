@@ -15,15 +15,14 @@
 
         <!-- Jackson. -->
         <tools.jackson.version>3.0.3</tools.jackson.version>
-        <tools.jackson.datatype.jsr310.version>3.0.0-rc3</tools.jackson.datatype.jsr310.version>
         <!-- XSLT. -->
-        <net.sf.saxon.version>12.4</net.sf.saxon.version>
+        <net.sf.saxon.version>12.9</net.sf.saxon.version>
         <org.apache.xmlgraphics.version>2.11</org.apache.xmlgraphics.version>
         <!-- MS Excel. -->
-        <org.apache.poi.version>5.4.1</org.apache.poi.version>
+        <org.apache.poi.version>5.5.1</org.apache.poi.version>
         <!-- Tools. -->
         <org.iban4j.version>3.2.11-RELEASE</org.iban4j.version>
-        <com.google.zxing.version>3.4.1</com.google.zxing.version>
+        <com.google.zxing.version>3.5.4</com.google.zxing.version>
         <org.mapstruct.version>1.6.3</org.mapstruct.version>
         <org.projectlombok.mapstruct-binding.version>0.2.0</org.projectlombok.mapstruct-binding.version>
         <org.projectlombok.version>1.18.42</org.projectlombok.version>
