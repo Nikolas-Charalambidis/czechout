@@ -13,35 +13,37 @@
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <!-- Jackson. -->
+        <!-- Jackson -->
         <tools.jackson.version>3.0.3</tools.jackson.version>
-        <!-- XSLT. -->
+        <!-- XSLT -->
         <net.sf.saxon.version>12.9</net.sf.saxon.version>
         <org.apache.xmlgraphics.version>2.11</org.apache.xmlgraphics.version>
-        <!-- MS Excel. -->
+        <!-- MS Excel -->
         <org.apache.poi.version>5.5.1</org.apache.poi.version>
-        <!-- Tools. -->
+        <!-- PDF -->
+        <org.apache.pdfbox.version>2.0.30</org.apache.pdfbox.version>
+        <!-- Tools -->
         <org.iban4j.version>3.2.11-RELEASE</org.iban4j.version>
         <com.google.zxing.version>3.5.4</com.google.zxing.version>
         <org.mapstruct.version>1.6.3</org.mapstruct.version>
         <org.projectlombok.mapstruct-binding.version>0.2.0</org.projectlombok.mapstruct-binding.version>
         <org.projectlombok.version>1.18.42</org.projectlombok.version>
-        <!-- Logging. -->
+        <!-- Logging -->
         <org.slf4j.version>2.0.17</org.slf4j.version>
         <org.log4j.version>2.25.3</org.log4j.version>
-        <!-- Quality. -->
+        <!-- Quality -->
         <org.checkerframework.version>3.53.0</org.checkerframework.version>
-        <!-- Tests. -->
+        <!-- Tests -->
         <org.junit.version>6.1.0-M1</org.junit.version>
 
-        <!-- Maven plugins. -->
+        <!-- Maven plugins -->
         <org.apache.maven.plugins.maven-compiler-plugin.version>3.14.1</org.apache.maven.plugins.maven-compiler-plugin.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <!-- Jackson. -->
+                <!-- Jackson -->
                 <groupId>tools.jackson</groupId>
                 <artifactId>jackson-bom</artifactId>
                 <version>${tools.jackson.version}</version>
@@ -49,7 +51,7 @@
                 <scope>import</scope>
             </dependency>
             <dependency>
-                <!-- Tests. -->
+                <!-- Tests -->
                 <groupId>org.junit</groupId>
                 <artifactId>junit-bom</artifactId>
                 <version>${org.junit.version}</version>
@@ -60,7 +62,7 @@
     </dependencyManagement>
 
     <dependencies>
-        <!-- Jackson. -->
+        <!-- Jackson -->
         <dependency>
             <groupId>tools.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
@@ -70,17 +72,17 @@
             <artifactId>jackson-databind</artifactId>
         </dependency>
         <dependency>
-            <!-- XmlMapper and @JacksonXml* annotations. -->
+            <!-- XmlMapper and @JacksonXml* annotations -->
             <groupId>tools.jackson.dataformat</groupId>
             <artifactId>jackson-dataformat-xml</artifactId>
         </dependency>
         <dependency>
-            <!-- YAMLMapper. -->
+            <!-- YAMLMapper -->
             <groupId>tools.jackson.dataformat</groupId>
             <artifactId>jackson-dataformat-yaml</artifactId>
         </dependency>
 
-        <!-- XSLT. -->
+        <!-- XSLT -->
         <dependency>
             <!-- XSLT 2.0 -->
             <groupId>net.sf.saxon</groupId>
@@ -88,29 +90,36 @@
             <version>${net.sf.saxon.version}</version>
         </dependency>
         <dependency>
-            <!-- FOP processor. -->
+            <!-- FOP processor -->
             <groupId>org.apache.xmlgraphics</groupId>
             <artifactId>fop</artifactId>
             <version>${org.apache.xmlgraphics.version}</version>
         </dependency>
 
-        <!-- MS Excel. -->
+        <!-- MS Excel -->
         <dependency>
-            <!-- OOXML support (xlsx). -->
+            <!-- OOXML support (xlsx) -->
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>
             <version>${org.apache.poi.version}</version>
         </dependency>
-
-        <!-- Tools. -->
+        
+        <!-- PDF -->
         <dependency>
-            <!-- Iban converter. -->
+            <groupId>org.apache.pdfbox</groupId>
+            <artifactId>pdfbox</artifactId>
+            <version>${org.apache.pdfbox.version}</version>
+        </dependency>
+
+        <!-- Tools -->
+        <dependency>
+            <!-- Iban converter -->
             <groupId>org.iban4j</groupId>
             <artifactId>iban4j</artifactId>
             <version>${org.iban4j.version}</version>
         </dependency>
         <dependency>
-            <!-- QR code. -->
+            <!-- QR code -->
             <groupId>com.google.zxing</groupId>
             <artifactId>core</artifactId>
             <version>${com.google.zxing.version}</version>
@@ -127,21 +136,21 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- Logging. -->
+        <!-- Logging -->
         <dependency>
-            <!-- Slf4j facade. -->
+            <!-- Slf4j facade -->
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>${org.slf4j.version}</version>
         </dependency>
         <dependency>
-            <!-- Slf4J implementation (Log4j). -->
+            <!-- Slf4J implementation (Log4j) -->
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-slf4j-impl</artifactId>
             <version>${org.log4j.version}</version>
         </dependency>
 
-        <!-- Quality. -->
+        <!-- Quality -->
         <dependency>
             <groupId>org.checkerframework</groupId>
             <artifactId>checker-qual</artifactId>
@@ -149,20 +158,16 @@
             <scope>compile</scope>
         </dependency>
 
-        <!-- Tests. -->
+        <!-- Tests -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.apache.pdfbox</groupId>
-            <artifactId>pdfbox</artifactId>
-            <version>2.0.30</version>
-        </dependency>
     </dependencies>
 
     <build>
+        <finalName>${artifactId}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
