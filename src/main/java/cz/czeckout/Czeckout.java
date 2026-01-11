@@ -40,11 +40,9 @@ import tools.jackson.databind.DeserializationFeature;
 import tools.jackson.databind.ObjectMapper;
 import tools.jackson.databind.SerializationFeature;
 import tools.jackson.databind.cfg.MapperBuilder;
-import tools.jackson.databind.json.JsonMapper;
 import tools.jackson.databind.module.SimpleModule;
 import tools.jackson.databind.ser.std.ToStringSerializer;
 import tools.jackson.dataformat.xml.XmlMapper;
-import tools.jackson.dataformat.yaml.YAMLMapper;
 import cz.czeckout.entity.Invoice;
 import cz.czeckout.entity.Invoices;
 import cz.czeckout.entity.PdfData;
@@ -55,18 +53,10 @@ import cz.czeckout.parser.InvoiceWorkbookParser;
 public class Czeckout {
 
     private final XmlMapper xmlMapper;
-    private final JsonMapper jsonMapper;
-    private final YAMLMapper yamlMapper;
 
     public Czeckout() {
         this.xmlMapper = configure(XmlMapper.builder())
             .defaultUseWrapper(false)
-            .build();
-
-        this.jsonMapper = configure(JsonMapper.builder())
-            .build();
-
-        this.yamlMapper = configure(YAMLMapper.builder())
             .build();
     }
 
@@ -96,15 +86,6 @@ public class Czeckout {
 
         SimpleModule bigDecimalAsString = new SimpleModule();
         bigDecimalAsString.addSerializer(BigDecimal.class, ToStringSerializer.instance);
-
-        //JsonNode tree = jsonMapper.valueToTree(invoices);
-        //String json = tree.toPrettyString();
-        ////System.out.println(json);
-        //Files.writeString(Path.of("invoices.json"), json);
-
-        jsonMapper.writeValue(Path.of("invoices.json").toFile(), invoices);
-        xmlMapper.writeValue(Path.of("invoices.xml").toFile(), invoices);
-        //yamlMapper.writeValue(Path.of("invoices.yaml").toFile(), invoices);
 
         generateIndividualPdfs(pdfData);
 
