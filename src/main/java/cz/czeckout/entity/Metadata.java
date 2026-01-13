@@ -16,9 +16,4 @@ public final class Metadata {
     private final Map<String, Method> methods;
     private final Map<String, String> variables;
 
-    public void refreshReferences() {
-         parties.values().forEach(party -> {
-            party.setAddress(addresses.get(party.getAddressReference()));
-        });
-    }
 }
