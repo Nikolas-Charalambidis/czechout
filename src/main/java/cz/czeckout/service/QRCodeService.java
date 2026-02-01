@@ -7,8 +7,11 @@ import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 
@@ -44,32 +47,37 @@ public class QRCodeService {
     }
 
     private String buildQRString(Account account, BigDecimal totalAmount, String message, LocalDate dueDate, String vs, String ss, String ks) {
-        final var sb = new StringBuilder("SPD*1.0*");
+        final var items = new ArrayList<String>();
+        items.add("SPD*1.0");
         
-        if (StringUtils.isNotBlank(account.getIban())) {
-            sb.append("ACC:").append(account.getIban()).append("*");
+        if (StringUtils.isNotBlank(account.getRawIban())) {
+            items.add(nullable("ACC", account.getRawIban()));
         }
         if (totalAmount != null) {
-            sb.append("AM:").append(totalAmount).append("*");
-            sb.append("CC:").append("CZK").append("*");
+            items.add(nullable("AM", totalAmount.toPlainString()));
+            items.add(nullable("CC", "CZK"));
         }
         if (StringUtils.isNotBlank(message)) {
-            sb.append("MSG:").append(message).append("*");
+            items.add(nullable("MSG", message));
         }
         if (dueDate != null) {
-            sb.append("DT:").append(dueDate.format(DateTimeFormatter.ofPattern("yyyyMMdd"))).append("*");
+            items.add(nullable("DT", dueDate.format(DateTimeFormatter.ofPattern("yyyyMMdd"))));
         }
         if (StringUtils.isNotBlank(vs)) {
-            sb.append("X-VS:").append(vs).append("*");
+            items.add(nullable("X-VS", vs));
         }
         if (StringUtils.isNotBlank(ss)) {
-            sb.append("X-SS:").append(ss).append("*");
+            items.add(nullable("X-SS", ss));
         }
         if (StringUtils.isNotBlank(ks)) {
-            sb.append("X-KS:").append(ks).append("*");
+            items.add(nullable("X-KS", ks));
         }
         
-        return sb.toString();
+        return items.stream().filter(Objects::nonNull).collect(Collectors.joining("*"));
+    }
+
+    private String nullable(final String prefix, final String value) {
+        return value == null ? null : prefix + ":" + value;
     }
 
     @SneakyThrows

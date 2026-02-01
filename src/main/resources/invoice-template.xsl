@@ -56,7 +56,7 @@
             <xsl:value-of select="string-join(($party/address/street, $party/address/houseNumber), ' ')"/>
         </fo:block>
         <fo:block xsl:use-attribute-sets="standard-margin">
-            <xsl:value-of select="concat($party/address/zipCode, ' ', $party/address/district, ', ', $party/address/city)"/>
+            <xsl:value-of select="concat($party/address/zipCode, ' ', $party/address/city, ' – ', $party/address/district)"/>
         </fo:block>
         <fo:block xsl:use-attribute-sets="standard-margin" font-weight="bold">
             <xsl:value-of select="concat($party/identifierType, ': ', $party/identifier)"/>
@@ -120,21 +120,21 @@
                     </fo:table-cell>
                     <fo:table-cell text-align="right">
                         <fo:block xsl:use-attribute-sets="label">&#160;</fo:block>
-                        <fo:block xsl:use-attribute-sets="standard-margin" margin-right="12px" ><xsl:value-of select="account/accountNumber"/>/<xsl:value-of select="account/bankCode"/></fo:block>
-                        <fo:block xsl:use-attribute-sets="standard-margin" margin-right="12px" ><xsl:value-of select="account/bankName"/></fo:block>
+                        <fo:block xsl:use-attribute-sets="standard-margin" margin-right="24px" ><xsl:value-of select="account/accountNumber"/>/<xsl:value-of select="account/bankCode"/></fo:block>
+                        <fo:block xsl:use-attribute-sets="standard-margin" margin-right="24px" ><xsl:value-of select="account/bankName"/></fo:block>
                         <xsl:if test="vs">
-                            <fo:block xsl:use-attribute-sets="standard-margin" margin-right="12px" ><xsl:value-of select="vs"/></fo:block>
+                            <fo:block xsl:use-attribute-sets="standard-margin" margin-right="24px" ><xsl:value-of select="vs"/></fo:block>
                         </xsl:if>
                         <xsl:if test="ks">
-                            <fo:block xsl:use-attribute-sets="standard-margin" margin-right="12px" ><xsl:value-of select="ks"/></fo:block>
+                            <fo:block xsl:use-attribute-sets="standard-margin" margin-right="24px" ><xsl:value-of select="ks"/></fo:block>
                         </xsl:if>
                         <xsl:if test="ss">
-                            <fo:block xsl:use-attribute-sets="standard-margin" margin-right="12px" ><xsl:value-of select="ss"/></fo:block>
+                            <fo:block xsl:use-attribute-sets="standard-margin" margin-right="24px" ><xsl:value-of select="ss"/></fo:block>
                         </xsl:if>
-                        <fo:block xsl:use-attribute-sets="standard-margin" margin-right="12px"><xsl:value-of select="method/name"/></fo:block>
-                        <fo:block xsl:use-attribute-sets="standard-margin" margin-right="12px"><xsl:value-of select="format-date(xs:date(issueDate), '[D].[M].[Y]')"/></fo:block>
-                        <fo:block xsl:use-attribute-sets="standard-margin" margin-right="12px"><xsl:value-of select="format-date(xs:date(taxDate), '[D].[M].[Y]')"/></fo:block>
-                        <fo:block xsl:use-attribute-sets="standard-margin" margin-right="12px" font-weight="bold"><xsl:value-of select="format-date(xs:date(dueDate), '[D].[M].[Y]')"/></fo:block>
+                        <fo:block xsl:use-attribute-sets="standard-margin" margin-right="24px"><xsl:value-of select="method/name"/></fo:block>
+                        <fo:block xsl:use-attribute-sets="standard-margin" margin-right="24px"><xsl:value-of select="format-date(xs:date(issueDate), '[D].[M].[Y]')"/></fo:block>
+                        <fo:block xsl:use-attribute-sets="standard-margin" margin-right="24px"><xsl:value-of select="format-date(xs:date(taxDate), '[D].[M].[Y]')"/></fo:block>
+                        <fo:block xsl:use-attribute-sets="standard-margin" margin-right="24px" font-weight="bold"><xsl:value-of select="format-date(xs:date(dueDate), '[D].[M].[Y]')"/></fo:block>
                     </fo:table-cell>
                     <fo:table-cell>
                         <fo:block xsl:use-attribute-sets="label" font-weight="bold">QR platba: </fo:block>
@@ -169,7 +169,7 @@
                     <fo:table-cell xsl:use-attribute-sets="table-cell" text-align="right"><fo:block>% DPH</fo:block></fo:table-cell>
                     <fo:table-cell xsl:use-attribute-sets="table-cell" text-align="right"><fo:block>Bez DPH</fo:block></fo:table-cell>
                     <fo:table-cell xsl:use-attribute-sets="table-cell" text-align="right"><fo:block>DPH</fo:block></fo:table-cell>
-                    <fo:table-cell xsl:use-attribute-sets="table-cell" text-align="right"><fo:block>Celkem</fo:block></fo:table-cell>
+                    <fo:table-cell xsl:use-attribute-sets="table-cell" text-align="right"><fo:block>Včetně DPH</fo:block></fo:table-cell>
                 </fo:table-row>
             </fo:table-header>
             <fo:table-body>

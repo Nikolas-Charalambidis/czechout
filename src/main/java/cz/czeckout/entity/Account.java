@@ -14,5 +14,12 @@ public class Account {
 
     private String bankName;
 
+    /**
+     * Formatted IBAN.
+     */
     private String iban;
+
+    public String getRawIban() {
+        return iban.replaceAll("\\s", "");
+    }
 }
