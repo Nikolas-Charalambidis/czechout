@@ -6,7 +6,6 @@ import tools.jackson.databind.SerializationFeature;
 import tools.jackson.databind.cfg.MapperBuilder;
 import tools.jackson.databind.json.JsonMapper;
 import tools.jackson.dataformat.xml.XmlMapper;
-import tools.jackson.dataformat.yaml.YAMLMapper;
 import tools.jackson.databind.ObjectMapper;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
